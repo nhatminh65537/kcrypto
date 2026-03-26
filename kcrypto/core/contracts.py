@@ -1,9 +1,3 @@
-"""Contracts for attack results and analyzer findings.
-
-This module provides structure-only scaffolds for the canonical output
-contracts used across kcrypto.
-"""
-
 from __future__ import annotations
 
 from html import escape

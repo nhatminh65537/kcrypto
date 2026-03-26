@@ -1,5 +1,3 @@
-"""Logger contract scaffold used by attack/analyze modules."""
-
 from __future__ import annotations
 
 from typing import Protocol, cast
