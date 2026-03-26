@@ -1,0 +1,1 @@
+"""Hastad attack scaffold."""

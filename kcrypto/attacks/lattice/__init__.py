@@ -1,0 +1,1 @@
+"""Lattice tools scaffold."""

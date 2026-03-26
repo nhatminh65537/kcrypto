@@ -1,0 +1,1 @@
+"""Smart factoring dispatcher scaffold."""

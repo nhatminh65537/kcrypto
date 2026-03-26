@@ -1,0 +1,1 @@
+"""Wiener attack scaffold."""

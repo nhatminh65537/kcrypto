@@ -1,0 +1,1 @@
+"""Optional dependency bridges scaffold."""
