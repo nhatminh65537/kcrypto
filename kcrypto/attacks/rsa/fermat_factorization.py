@@ -1,4 +1,4 @@
-"""Tier 1 skeleton for Fermat factorization attack."""
+"""Factor RSA modulus with Fermat decomposition (Tier 1)."""
 
 from __future__ import annotations
 
@@ -19,31 +19,32 @@ def fermat_factorization(
     max_iterations: int | None = None,
     verbose: bool = False,
 ) -> Result:
-    """Attempt to factor an odd RSA modulus with Fermat's method.
+    """Factor an odd modulus ``N`` using Fermat's difference-of-squares method.
 
     Tier:
-        T1 (pure function)
+        T1 (pure function).
 
     Applicability:
-        Works when RSA primes are close to each other (small |p - q|).
+        Most effective when the prime factors are close, meaning ``|p - q|`` is
+        relatively small.
 
-    Failure mode:
-        Returns ``Result(success=False, error=...)`` for invalid inputs,
-        when no square decomposition is found within the iteration bound,
-        or when only trivial factors are recovered.
+    Failure Mode:
+        Returns ``Result(success=False, error=...)`` for invalid inputs, when no
+        square decomposition is found under the iteration bound, or when only
+        trivial factors are produced.
 
-    Data keys on success:
-        ``p``: First recovered prime factor.
-        ``q``: Second recovered prime factor.
-        ``iterations``: Number of Fermat iterations required.
+    Success Data Keys:
+        p: First recovered prime factor.
+        q: Second recovered prime factor.
+        iterations: Number of loop iterations needed before recovery.
 
     Args:
         N: RSA modulus to factor.
-        max_iterations: Optional safety bound for iteration count.
-        verbose: Enable checkpoint logs.
+        max_iterations: Optional upper bound on search iterations.
+        verbose: If True, emit checkpoint logs.
 
     Returns:
-        A ``Result`` contract payload for attack execution.
+        Result contract containing attack status, outputs, and metadata.
     """
     started = perf_counter()
     log = make_logger("fermat_factorization", verbose)

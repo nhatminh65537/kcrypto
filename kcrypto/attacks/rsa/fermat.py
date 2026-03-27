@@ -1,1 +1,0 @@
-"""Fermat attack scaffold."""

@@ -1,0 +1,101 @@
+{
+  "basis": [
+    [
+      4,
+      1,
+      3
+    ],
+    [
+      2,
+      1,
+      1
+    ],
+    [
+      1,
+      0,
+      2
+    ]
+  ],
+  "target": [
+    6,
+    3,
+    2
+  ],
+  "lll": {
+    "delta": 0.99,
+    "eta": 0.501,
+    "algorithm": "fpLLL:wrapper",
+    "reduced_basis": [
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        1
+      ],
+      [
+        0,
+        1,
+        1
+      ]
+    ]
+  },
+  "bkz": {
+    "block_size": 2,
+    "algorithm": "fpLLL",
+    "reduced_basis": [
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        -1,
+        1
+      ],
+      [
+        0,
+        1,
+        1
+      ]
+    ]
+  },
+  "cvp": {
+    "exact": {
+      "closest_vector": [
+        6,
+        2,
+        2
+      ],
+      "distance_sq": 1
+    },
+    "babai_nearest_plane": {
+      "closest_vector": [
+        6,
+        2,
+        2
+      ],
+      "distance_sq": 1
+    },
+    "kannan_embedding": {
+      "closest_vector": [
+        6,
+        2,
+        2
+      ],
+      "distance_sq": 1
+    },
+    "rounding_enumeration": {
+      "closest_vector": [
+        6,
+        2,
+        2
+      ],
+      "distance_sq": 1
+    }
+  }
+}
