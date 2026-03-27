@@ -1,1 +1,0 @@
-"""Discrete log attacks scaffold."""

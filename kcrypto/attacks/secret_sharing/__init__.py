@@ -1,1 +1,0 @@
-"""Secret sharing attacks scaffold."""

@@ -1,1 +1,0 @@
-"""Franklin-Reiter attack scaffold."""

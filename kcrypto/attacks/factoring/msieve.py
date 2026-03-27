@@ -1,1 +1,0 @@
-"""Msieve wrapper scaffold."""

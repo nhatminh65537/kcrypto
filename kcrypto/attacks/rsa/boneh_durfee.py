@@ -1,1 +1,0 @@
-"""Boneh-Durfee attack scaffold."""

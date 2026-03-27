@@ -1,1 +1,0 @@
-"""Coppersmith attack scaffold."""

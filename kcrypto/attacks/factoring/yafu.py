@@ -1,1 +1,0 @@
-"""YAFU wrapper scaffold."""

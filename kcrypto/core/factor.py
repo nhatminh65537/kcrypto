@@ -1,1 +1,0 @@
-"""Core factoring helpers scaffold."""
