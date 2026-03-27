@@ -51,15 +51,7 @@ def require_sage():
 		raise _missing_dependency_error() from exc
 
 
-if SAGE_AVAILABLE:
-	_sage_all = require_sage()
-	matrix = _sage_all.matrix
-	vector = _sage_all.vector
-else:
-	_missing = _MissingSage()
-	matrix = _missing
-	vector = _missing
-
+sage = require_sage() if SAGE_AVAILABLE else _MissingSage()
 
 __all__ = [
 	"SAGE_AVAILABLE",

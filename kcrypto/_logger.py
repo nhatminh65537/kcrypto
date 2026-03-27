@@ -1,1 +1,0 @@
-"""Logger scaffold for kcrypto."""

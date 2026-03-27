@@ -58,7 +58,7 @@ def test_require_functions_raise_actionable_error_when_dependency_missing(
         if name == module_name:
             raise ImportError(f"No module named '{module_name}'")
         return real_import_module(name, package)
-
+                
     monkeypatch.setattr(importlib, "import_module", fake_import_module)
 
     with pytest.raises(ImportError, match=install_pkg):
