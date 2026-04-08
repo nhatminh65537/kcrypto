@@ -8,13 +8,13 @@ Last updated: 2026-03-27
 
 - SCAFFOLD: file/module exists with docstring or placeholder only.
 - CONTRACT-READY: core contracts/utilities implemented and tested.
-- IMPLEMENTED: functional algorithm/logic implemented.
+- IMPLEMENTED: functional algorithm/logic implemented (none in attack/analyze at this snapshot).
 
 ## 2. Quick Inventory Summary
 
 | Area | Total files | Implemented | Scaffold |
 |---|---:|---:|---:|
-| `kcrypto/attacks/` (python files) | 27 | 3 | 24 |
+| `kcrypto/attacks/` (python files) | 27 | 0 | 27 |
 | `kcrypto/analyze/` (python files) | 3 | 0 | 3 |
 | `kcrypto/core/` (python files) | 6 | 2 (`contracts.py`, `logger.py`) | 4 |
 
@@ -29,8 +29,8 @@ Last updated: 2026-03-27
 | `kcrypto.attacks.factoring` | SCAFFOLD | package + wrappers/dispatcher skeletons |
 | `kcrypto.attacks.hash` | SCAFFOLD | package `__init__` only |
 | `kcrypto.attacks.isogeny` | SCAFFOLD | package `__init__` only |
-| `kcrypto.attacks.lattice` | SCAFFOLD+TESTED | LLL/BKZ wrappers implemented; CVP modules contract-ready scaffolds |
-| `kcrypto.attacks.rsa` | PARTIAL | `fermat_factorization` implemented; remaining files are scaffold |
+| `kcrypto.attacks.lattice` | SCAFFOLD | package `__init__` only |
+| `kcrypto.attacks.rsa` | SCAFFOLD | package + attack file skeletons |
 | `kcrypto.attacks.secret_sharing` | SCAFFOLD | package `__init__` only |
 | `kcrypto.attacks.signatures` | SCAFFOLD | package `__init__` only |
 | `kcrypto.attacks.symmetric` | SCAFFOLD | package `__init__` only |
@@ -42,7 +42,7 @@ Last updated: 2026-03-27
 | `kcrypto/attacks/rsa/wiener.py` | SCAFFOLD |
 | `kcrypto/attacks/rsa/hastad.py` | SCAFFOLD |
 | `kcrypto/attacks/rsa/fermat.py` | SCAFFOLD |
-| `kcrypto/attacks/rsa/fermat_factorization.py` | IMPLEMENTED (Tier T1 bounded Fermat factorization) |
+| `kcrypto/attacks/rsa/fermat_factorization.py` | SCAFFOLD (Tier T1 contract stub) |
 | `kcrypto/attacks/rsa/know_d_factor.py` | SCAFFOLD (Tier T1 contract stub) |
 | `kcrypto/attacks/rsa/known_phi_factor.py` | SCAFFOLD (Tier T1 contract stub) |
 | `kcrypto/attacks/rsa/coppersmith.py` | SCAFFOLD |
@@ -59,16 +59,6 @@ Last updated: 2026-03-27
 | `kcrypto/attacks/factoring/yafu.py` | SCAFFOLD |
 | `kcrypto/attacks/factoring/msieve.py` | SCAFFOLD |
 | `kcrypto/attacks/factoring/smart.py` | SCAFFOLD |
-
-### 3.4 Lattice Attack Files
-
-| File | Status |
-|---|---|
-| `kcrypto/attacks/lattice/lll.py` | IMPLEMENTED (Sage wrapper, Tier 1) |
-| `kcrypto/attacks/lattice/bkz.py` | IMPLEMENTED (Sage wrapper, Tier 1) |
-| `kcrypto/attacks/lattice/cvp_babai.py` | SCAFFOLD (contract-ready, Tier 1 TODO) |
-| `kcrypto/attacks/lattice/cvp_kannan.py` | SCAFFOLD (contract-ready, Tier 1 TODO) |
-| `kcrypto/attacks/lattice/cvp_enum.py` | SCAFFOLD (contract-ready, Tier 1 TODO) |
 
 ## 4. Analyze Modules (Current Snapshot)
 
@@ -96,19 +86,12 @@ Last updated: 2026-03-27
 | `tests/core/test_contracts.py` | ACTIVE |
 | `tests/core/test_logger.py` | ACTIVE |
 | `tests/core/test_bridges.py` | ACTIVE |
-| `tests/attacks/rsa/test_rsa_skeleton_contracts.py` | ACTIVE (contract + fixture consistency + skeleton placeholders for non-Fermat RSA attacks) |
-| `tests/attacks/rsa/test_fermat_factorization.py` | ACTIVE (success/failure/edge-case behavior for Fermat) |
-| `tests/attacks/lattice/test_lll.py` | ACTIVE |
-| `tests/attacks/lattice/test_bkz.py` | ACTIVE |
-| `tests/attacks/lattice/test_cvp_babai.py` | ACTIVE (`xfail` for TODO algorithm path) |
-| `tests/attacks/lattice/test_cvp_kannan.py` | ACTIVE (`xfail` for TODO algorithm path) |
-| `tests/attacks/lattice/test_cvp_enum.py` | ACTIVE (`xfail` for TODO algorithm path) |
-| `tests/attacks/**` | PARTIAL (lattice only, other domains pending) |
+| `tests/attacks/rsa/test_rsa_skeleton_contracts.py` | ACTIVE (contract + fixture consistency + xfail expected-success placeholders) |
 
 Implication:
 
 - Core baseline contracts/logging/bridges are test-covered.
-- Attack and analyze layers are scaffold-first overall, with implemented/tested pockets in lattice and RSA Fermat.
+- Attack and analyze layers are currently scaffold-first with minimal/no behavior coverage.
 
 ## 7. Canonical Attack Naming (Cheatsheet View)
 

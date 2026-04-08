@@ -42,15 +42,53 @@ Principle: Agent provides high-quality structure (API, contracts, tests, docs). 
 ### Tier 1 - Pure Function
 
 ```python
-def wiener(e: int, N: int, c: int | None = None, verbose: bool = False) -> Result:
-    """..."""
-    log = make_logger("wiener", verbose)
-    # TODO: implement attack math
-    raise NotImplementedError("Human implements")
+from kcrypto.core.contracts import Result
+from kcrypto.core.logger import make_logger
+
+_ATTACK = "rsa/wiener_attack"  # canonical catalog key — one per module
+
+
+def _fail(error: str, start: float) -> Result:
+    """Shared failure helper — avoids repeating Result(success=False, ...) boilerplate."""
+    import time
+    return Result(
+        success=False,
+        attack=_ATTACK,
+        error=error,
+        elapsed=(time.time() - start) * 1000,
+    )
+
+
+def wiener_attack(e: int, n: int, *, verbose: bool = False) -> Result:
+    """<One-sentence description of what the attack does.>
+
+    Args:
+        e: Public exponent.
+        n: RSA modulus.
+        verbose: If True, print progress. Default False.
+
+    Returns:
+        Result with data["d"] on success.
+        Result with success=False if continued fraction expansion yields no solution.
+
+    Raises:
+        Nothing. All failures encoded as Result(success=False, error=...).
+    """
+    import time
+    log = make_logger(_ATTACK, verbose)
+    start = time.time()
+
+    log("Starting Wiener attack", "step")
+    # TODO: implement continued fraction convergents — Human implements
+    raise NotImplementedError
 ```
 
+Rules:
+- `_ATTACK` module-level constant — avoids string duplication across `Result` returns
+- `_fail()` module-level helper — avoids repeating `Result(success=False, ...)` in every except block
+- `import time` inside function for modules without Sage dependency; at top-level otherwise
 - No multi-step inspectable state is required
-- Direct input -> output flow
+- Direct input → output flow
 
 ### Tier 2 - Stateful Object
 
@@ -119,8 +157,27 @@ class MyAttack:
 
 ### 5.3 Docstrings
 
-- Public functions/classes in `kcrypto/attacks/` and `kcrypto/analyze/` must use Google-style docstrings
-- Docstrings must describe applicability, failure mode, and key fields in `data`
+Public functions/classes in `kcrypto/attacks/` and `kcrypto/analyze/` must use Google-style docstrings.
+
+**4 required sections** (in this order):
+
+1. **Summary line** — one sentence, what the attack does (not how)
+2. **Args** — every parameter; for `**kwargs` describe common keys
+3. **Returns** — `data` keys on success AND failure condition phrasing
+4. **Raises** — always `Nothing. All failures encoded as Result(success=False, error=...)`.
+
+**Example section**: omit in scaffolds; add only after implementation is complete and tested.
+
+**Inline comments**: only when logic is not self-evident. Required for:
+- Algorithm step labels: `# Step 1: build continued fraction convergents`
+- Non-obvious thresholds: `# Wiener bound: attack works when d < n^0.25 / 3`
+- Human TODO blocks: `# TODO: <description> — Human implements`
+
+**Module docstring**: one line, mandatory.
+
+```python
+"""<Attack name> attack implementation."""
+```
 
 ### 5.4 Tests
 
@@ -262,20 +319,33 @@ kcrypto | decision: keep factoring dispatcher as single entrypoint
 
 ```text
 AGENTS.md
+CLAUDE.md
 pyproject.toml
 README.md
 docs/
+  dev/
+    architecture.md
+    module-progress-cheatsheet.md
+  user/
+    <domain>/          # user-facing attack tutorials
 kcrypto/
   __init__.py
-  _logger.py
-  _result.py
+  core/
+    contracts.py       # Result, Finding
+    logger.py          # make_logger
+  bridges/
+    sage.py            # SageMath lazy adapter
+    z3.py              # z3-solver lazy adapter
+    pwn.py             # pwntools lazy adapter
   analyze/
   attacks/
-  bridges/
-  core/
+    <domain>/
+      __init__.py      # re-exports public functions
+      <attack>.py      # one attack per file
 tests/
   attacks/
-  fixtures/
+    <domain>/
+      test_<attack>.py
 ```
 
 Notes:
@@ -283,6 +353,7 @@ Notes:
 - Attack modules live in `kcrypto/attacks/<domain>/`
 - Analyze modules live in `kcrypto/analyze/`
 - Optional dependency bridges live in `kcrypto/bridges/`
+- Each domain has an `__init__.py` that explicitly re-exports public symbols
 
 ---
 
